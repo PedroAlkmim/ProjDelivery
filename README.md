@@ -10,11 +10,11 @@ Backend em **FastAPI + SQLAlchemy + PostgreSQL**. Usa o banco que já existe (14
 ## 2. Instalação
 
 ```bash
-cd delivery_api
+cd ProjDelivery
 python -m venv .venv
 
 # Windows
-.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
 
 # Linux/macOS
 source .venv/bin/activate
@@ -29,21 +29,15 @@ Copie `.env.example` para `.env` e ajuste **DATABASE_URL** (usuário, senha, por
 ```env
 DATABASE_URL=postgresql+psycopg2://postgres:SUA_SENHA@localhost:5432/NOME_DO_BANCO
 SECRET_KEY=um-texto-longo-qualquer
-```
 
 ## 4. Converter as senhas de teste para hash (uma única vez)
 
-Os 4 usuários de teste foram inseridos com a senha `123456` em texto puro. A API usa bcrypt para armazenar as senhas com segurança.
+A API utiliza bcrypt para armazenar as senhas dos usuários com segurança.
 
-Em um banco recém-preparado, execute:
+Em um banco recém-preparado, cujas senhas ainda estejam em texto puro, execute:
 
 ```bash
 python -m scripts.hash_senhas
-```
-
-**ATENÇÃO:** execute esse script somente uma vez, antes de as senhas serem convertidas para hash. Não execute novamente em um banco que já possui senhas convertidas, pois isso pode impedir os usuários de realizar login.
-
-Depois da conversão, a senha de todos continua sendo `123456` para fazer login.
 
 ## 5. Executar
 
@@ -233,7 +227,7 @@ Use depois `"codigo_cupom": "PROMO10"` no pedido. Com subtotal de 60,00: descont
 ## 11. Estrutura
 
 ```text
-delivery_api/
+ProjDelivery/
 ├── app/
 │   ├── main.py             # app FastAPI e registro das rotas
 │   ├── config.py           # variáveis do .env
@@ -245,8 +239,11 @@ delivery_api/
 │   ├── schemas/            # modelos de entrada/saída
 │   ├── services/           # regras de negócio
 │   └── routers/            # endpoints por perfil
-├── scripts/hash_senhas.py
+├── backup/
+│   └── database_delivery.sql  # backup do banco PostgreSQL
+├── scripts/
+│   └── hash_senhas.py
 ├── requirements.txt
 ├── .env.example
-└── .gitignore
-```
+├── .gitignore
+└── README.md
