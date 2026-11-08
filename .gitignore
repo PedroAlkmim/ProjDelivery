@@ -1,0 +1,20 @@
+# Arquivos secretos
+.env
+.env.*
+
+# Permite manter o modelo
+!.env.example
+
+# Ambiente virtual
+.venv/
+venv/
+
+# Arquivos temporários Python
+__pycache__/
+*.py[cod]
+
+# Configurações locais
+.vscode/
+
+# Logs
+*.log
